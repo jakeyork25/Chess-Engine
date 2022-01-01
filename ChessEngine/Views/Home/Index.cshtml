@@ -1,0 +1,1361 @@
+﻿<style>
+    #body-div {
+        position: absolute;
+        top: 0%;
+        left: 0%;
+        height: 100%;
+        width: 100%;
+        background-color: rgb(40, 40, 40);
+    }
+
+    #side-menu {
+        position: absolute;
+        width: 10%;
+        height: 100%;
+        background-color: rgb(10, 10, 10);
+    }
+
+    #session-display {
+        position: absolute;
+        top: 50%;
+        left: 80%;
+        transform: translate(-50%, -50%);
+        height: 90%;
+        width: 30%;
+        border: 1px solid transparent;
+        background-color: rgb(30, 30, 30);
+        color: white;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    #ai-display {
+        position: absolute;
+        width: 100%;
+        height: 20%;
+        background-color: rgb(20, 20, 20);
+    }
+
+    #ai-window {
+        position: absolute;
+        top: 50%;
+        left: 3%;
+        transform: translateY(-50%);
+        border-radius: 10px;
+        background-color: white;
+        width: 80px;
+        height: 80px;
+        background-image: url(https://static.vecteezy.com/system/resources/thumbnails/000/550/731/small/user_icon_004.jpg);
+        background-size: contain;
+    }
+
+    #speech-bubble {
+        position: relative;
+        width: 60%;
+        height: 80%;
+        left: 35%;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgb(120, 120, 120);
+        border-radius: 4px;
+        padding-right: 5%;
+        padding-left: 5%;
+        padding-top: 5%;
+        padding-bottom: 5%;
+    }
+
+        #speech-bubble:after {
+            content: ' ';
+            position: absolute;
+            width: 0;
+            height: 0;
+            left: -25px;
+            top: 30px;
+            border: 15px solid;
+            border-color: transparent rgb(120, 120, 120) rgb(120, 120, 120) transparent;
+        }
+
+    #options-button {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        top: 50%;
+        left: 10%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 40px;
+        line-height: 40px;
+        font-family: 'Segoe UI Symbol';
+    }
+
+        #options-button:after {
+            content: "\2699";
+        }
+
+        #options-button:hover {
+            color: gray;
+        }
+
+    #options-menu {
+        position: absolute;
+        width: 350px;
+        height: 500px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid transparent;
+        border-radius: 12px;
+        background-color: rgb(55, 55, 55);
+        visibility: hidden;
+        overflow: hidden;
+    }
+
+    .options-header{
+        position: absolute;
+        height: 8%;
+        width: 100%;
+        background-color: rgb(45, 45, 45);
+    }
+
+    .exit-button {
+        position: absolute;
+        left: 90%;
+        top: 50%;
+        width: 20px;
+        height: 20px;
+        transform: translateY(-50%);
+        color: gray;
+    }
+
+        .exit-button:after {
+            content: "\0058";
+        }
+
+        .exit-button:hover {
+            color: white;
+        }
+
+    #confirm-options-button{
+        position: absolute;
+        left: 50%;
+        top: 90%;
+        width: 80px;
+        height: 30px;
+        transform: translate(-50%, -50%);
+        border: 1px solid rgb(20, 20, 20);
+        border-radius: 4px;
+        background-color: rgb(35, 35, 35);
+        color: lightgray;
+    }
+
+    .option-text{
+        position: absolute;
+        color: gray;
+        left: 8%;
+    }
+
+    .option-selector{
+        position: absolute;
+        left: 52%;
+    }
+
+    #position-log {
+        position: absolute;
+        top: 20%;
+        width: 100%;
+        height: 72%;
+        background-color: rgb(50, 50, 50);
+        overflow-y: auto;
+    }
+
+    #position-log::-webkit-scrollbar-thumb{
+        background-color: rgb(5, 5, 5);
+        border-radius: 8px;
+    }
+        #position-log::-webkit-scrollbar-thumb:hover{
+            background-color: rgb(10, 10, 10);
+        }
+
+    #position-log::-webkit-scrollbar{
+        background-color: rgb(20, 20, 20);
+    }
+
+    .move-slot-odd{
+        position: relative;
+        width: 100%;
+        padding-left: 5%;
+        height: 10%;
+        background-color: rgb(30, 30, 30);
+        color: white;
+    }
+    .move-slot-even{
+        position: relative;
+        width: 100%;
+        padding-left: 5%;
+        height: 10%;
+        background-color: rgb(35, 35, 35);
+    }
+    .slot-index{
+        position: absolute;
+        top: 50%;
+        left: 4%;
+        transform: translateY(-50%);
+    }
+
+    .player-move{
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        transform: translateY(-50%);
+    }
+
+    .opp-move{
+        position: absolute;
+        top: 50%;
+        left: 55%;
+        transform: translateY(-50%);
+    }
+
+    #option-section {
+        position: absolute;
+        top: 92%;
+        width: 100%;
+        height: 8%;
+        background-color: rgb(50, 50, 50);
+    }
+
+    .game-over-screen{
+        position: absolute;
+        width: 40%;
+        height: 70%;
+        z-index: 101;
+        border-radius: 8px;
+        background-color: dimgray;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        visibility: hidden;
+    }
+
+    .game-over-title{
+        width: 80%;
+        height: 15%;
+        color: white;
+        position: absolute;
+        top: 5%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    #turn-display {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border: 1px solid black;
+        border-radius: 20px;
+        top: 50%;
+        left: 80%;
+        transform: translateY(-50%);
+        background-color: forestgreen;
+    }
+
+    .chess-square {
+        position: relative;
+        width: 70px;
+        height: 70px;
+        background-color: gray;
+        float: left;
+    }
+
+        .chess-square:hover {
+            filter: saturate(150%);
+        }
+
+    .odd {
+        background-color: saddlebrown;
+    }
+
+    .even {
+        background-color: sandybrown;
+    }
+
+    #test-chess-board {
+        position: absolute;
+        width: 562px;
+        height: 562px;
+        left: 36%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        border: 1px solid transparent;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .total-piece-container {
+        position: absolute;
+        width: 562px;
+        height: 42px;
+        left: 36%;
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+
+    .container-profile{
+        width: 36px;
+        height: 36px;
+        position: absolute;
+        left: 5%;
+        top: 50%;
+        border-radius: 4px;
+        background-size: contain;
+    }
+
+    .piece-container{
+        position: absolute;
+        width: 90%;
+        height: 100%;
+        top: 0%;
+        left: 10%
+    }
+
+    .container-piece-icon {
+        position: relative;
+        width: 36px;
+        height: 36px;
+        float: left;
+        color: black;
+        font-size: 36px;
+        line-height: 36px;
+    }
+
+    .small-pawn:after {
+        content: "\265F";
+        font-family: 'Segoe UI Symbol';
+    }
+    .small-knight:after {
+        content: "\265E";
+    }
+    .small-rook:after {
+        content: "\0265C";
+    }
+    .small-bishop:after {
+        content: "\265D";
+    }
+    .small-queen:after {
+        content: "\265B";
+    }
+
+    .pawn-changer-container{
+        position: absolute;
+        width: 72px;
+        height: 282px;
+        left: 57%;
+        top: 7%;
+        border: 1px solid black;
+        background-color: lightblue;
+        z-index: 100;
+        visibility: hidden;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    .pawn-changer-button {
+        position: relative;
+        width: 100%;
+        height: 25%;
+        color: white;
+        font-size: 58px;
+        line-height: 58px;
+        text-align: center;
+    }
+
+    #queen-button:before {
+        content: "\265B"; 
+        position: absolute;
+        transform: translate(-50%, -50%);
+    }
+    #queen-button:after {
+        color: black;
+        content: "\2655";
+        position: absolute;
+        transform: translate(-50%, -50%);
+    }
+    #rook-button:before {
+        content: "\0265C";
+        position: absolute;
+        transform: translate(-50%, -50%);
+    }
+    #rook-button:after {
+        color: black;
+        content: "\02656";
+        position: absolute;
+        transform: translate(-50%, -50%);
+    }
+    #bishop-button:before {
+        content: "\265D";
+        position: absolute;
+        transform: translate(-50%, -50%);
+    }
+    #bishop-button:after {
+        color: black;
+        content: "\2657";
+        position: absolute;
+        transform: translate(-50%, -50%);
+    }
+    #knight-button:before {
+        content: "\265E";
+        position: absolute;
+        transform: translate(-50%, -50%);
+    }
+    #knight-button:after {
+        color: black;
+        content: "\2658";
+        position: absolute;
+        transform: translate(-50%, -50%);
+    }
+
+    .player-chess-piece {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background-color: transparent;
+        font-size: 70px;
+        line-height: 70px;
+        color: white;
+    }
+
+    .pawn {
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+    }
+
+    .player-chess-piece.pawn:before {
+        content: "\265F";
+        position: absolute;
+        font-family:'Segoe UI Symbol';
+    }
+
+    .player-chess-piece.pawn:after {
+        content: "\2659";
+        color: black;
+        position: absolute;
+    }
+
+    .opp-chess-piece.pawn:before {
+        content: "\265F";
+        position: absolute;
+        font-family: 'Segoe UI Symbol';
+    }
+
+    .opp-chess-piece.pawn:after {
+        content: "\2659";
+        color: black;
+        position: absolute;
+    }
+
+    .rook {
+        width: 100%;
+        height: 100%;
+        z-index : 10;
+    }
+
+    .player-chess-piece.rook:before {
+        content: "\0265C";
+        position: absolute;
+    }
+
+    .player-chess-piece.rook:after {
+        color: black;
+        content: "\02656";
+        position: absolute;
+    }
+
+    .opp-chess-piece.rook:before {
+        content: "\0265C";
+        position: absolute;
+    }
+
+    .opp-chess-piece.rook:after{
+        content: "\02656";
+        color: black;
+        position: absolute;
+    }
+
+    .bishop {
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+    }
+
+    .player-chess-piece.bishop:before {
+        content: "\265D";
+        position: absolute;
+        font-size: 65px;
+    }
+
+    .player-chess-piece.bishop:after {
+        color: black;
+        content: "\2657";
+        position: absolute;
+        font-size: 65px;
+    }
+
+    .opp-chess-piece.bishop:before {
+        content: "\265D";
+        position: absolute;
+    }
+
+    .opp-chess-piece.bishop:after {
+        content: "\2657";
+        color: black;
+        position: absolute;
+    }
+
+    .knight {
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+    }
+
+    .player-chess-piece.knight:before {
+        content: "\265E";
+        position: absolute;
+    }
+
+    .player-chess-piece.knight:after {
+        color: black;
+        content: "\2658";
+        position: absolute;
+    }
+
+    .opp-chess-piece.knight:before {
+        content: "\265E";
+        position: absolute;
+    }
+
+    .opp-chess-piece.knight:after {
+        content: "\2658";
+        color: black;
+        position: absolute;
+    }
+
+    .queen {
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+    }
+
+    .player-chess-piece.queen:before {
+        content: "\265B";
+        position: absolute;
+    }
+
+    .player-chess-piece.queen:after {
+        color: black;
+        content: "\2655";
+        position: absolute;
+    }
+
+    .opp-chess-piece.queen:before {
+        content: "\265B";
+        position: absolute;
+    }
+
+    .opp-chess-piece.queen:after {
+        content: "\2655";
+        color: black;
+        position: absolute;
+    }
+
+    .king {
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+    }
+
+    .player-chess-piece.king:before {
+        content: "\265A";
+        position: absolute;
+    }
+
+    .player-chess-piece.king:after {
+        color: black;
+        content: "\2654";
+        position: absolute;
+    }
+
+    .opp-chess-piece.king:before {
+        content: "\265A";
+        position: absolute;
+    }
+
+    .opp-chess-piece.king:after {
+        content: "\2654";
+        color: black;
+        position: absolute;
+    }
+
+    .opp-chess-piece {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 70px;
+        line-height: 70px;
+        color: rgb(0, 0, 0);
+    }
+
+    .position-indicator{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 20px;
+        height: 20px;
+        background-color: rgb(150, 150, 150);
+        border: 1px solid gray;
+        border-radius: 10px;
+        filter: opacity(50%);
+
+    }
+
+    .hostile-position-indicator {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+        background-color: rgb(140, 140, 140);
+        border: 1px solid rgb(140, 140, 140);
+        border-radius: 25px;
+        filter: opacity(50%);
+    }
+
+    .new-game-button{
+        position: absolute;
+        left: 50%;
+        top: 90%;
+        transform: translate(-50%, -50%);
+        width: 40%;
+        height: 10%;
+        border: 1px solid black;
+        border-radius: 6px;
+        background-color: mediumblue;
+        color: floralwhite;
+    }
+
+    #player-color-marker{
+        position: absolute;
+        left: -10%;
+        top: -10%;
+        width: 5px;
+        height: 5px;
+        color: white;
+    }
+    #player-secondary-marker {
+        position: absolute;
+        left: -10%;
+        top: -10%;
+        width: 5px;
+        height: 5px;
+        color: rgb(225, 225, 225);
+    }
+    #opp-color-marker {
+        position: absolute;
+        left: -10%;
+        top: -10%;
+        width: 5px;
+        height: 5px;
+        color: rgb(0, 0, 0);
+    }
+    #logo-container {
+        position: absolute;
+        top: 5%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 100px;
+        background-image: url(https://www.dynamicx.co.nz/stock-photo-preview/103730088/350/ist_22196_31314.jpg);
+        background-size: contain;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+    #website-name{
+        position: absolute;
+        top: 24%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 50px;
+        text-align: center;
+        color: white;
+    }
+    
+</style>
+
+<!DOCTYPE html>
+<html>
+<body>
+    <div id="body-div">
+        <div class="game-over-screen">
+            <p class="game-over-title"></p>
+            <button class="new-game-button">New Game</button>
+        </div>
+        <div id="player-color-marker"></div>
+        <div id="player-secondary-marker"></div>
+        <div id="opp-color-marker"></div>
+        <div id="side-menu">
+            <div id="logo-container"></div>
+            <p id="website-name">Nebula Chess</p>
+            <button class="new-game-button" style="width: 90%; height: 7%; background-color: rgb(40, 40 , 40); top: 55%; transform: translate(-50%, -50%)">New Game</button>
+        </div>
+        <div class="total-piece-container" style="top: 4%; transform: translate(-50%, -50%); background-color: rgb(25, 25, 25)">
+            <div class="container-profile" style="transform: translate(-50%, -50%); background-image: url(https://static.vecteezy.com/system/resources/thumbnails/000/550/731/small/user_icon_004.jpg)"></div>
+            <div class="piece-container" id="opp-piece-container"></div>
+        </div>
+        <div class="total-piece-container" style="top: 96%; transform: translate(-50%, -50%); background-color: rgb(80, 80, 80)">
+            <div class="container-profile" style="transform: translate(-50%, -50%); background-image: url(https://i.pinimg.com/originals/5f/60/f9/5f60f91f5eb626f6ca7e16afa8f02cb0.jpg)"></div>
+            <div class="piece-container" id="player-piece-container"></div>
+        </div>
+        <div class="pawn-changer-container">
+            <button class="pawn-changer-button" id="queen-button"></button>
+            <button class="pawn-changer-button" id="rook-button"></button>
+            <button class="pawn-changer-button" id="knight-button"></button>
+            <button class="pawn-changer-button" id="bishop-button"></button>
+        </div>
+        <div id="turn-display"></div>
+        <div id="session-display">
+            <div id="ai-display">
+                <div id="ai-window"></div>
+                <div id="speech-bubble"><p id="ai-text-bubble"></p></div>
+            </div>
+            <div id="position-log"></div>
+            <div id="option-section">
+                <div id="options-button"></div>
+            </div>
+        </div>
+        <div id="test-chess-board">
+            <div class="chess-square odd" id="a-1"><div class="opp-chess-piece rook" id="opponent-rook-1"></div></div>
+            <div class="chess-square even" id="a-2"><div class="opp-chess-piece knight" id="opponent-knight-1"></div></div>
+            <div class="chess-square odd" id="a-3"><div class="opp-chess-piece bishop" id="opponent-bishop-1"></div></div>
+            <div class="chess-square even" id="a-4"><div class="opp-chess-piece queen" id="opponent-queen-1"></div></div>
+            <div class="chess-square odd" id="a-5"><div class="opp-chess-piece king" id="opponent-king-1"></div></div>
+            <div class="chess-square even" id="a-6"><div class="opp-chess-piece bishop" id="opponent-bishop-2"></div></div>
+            <div class="chess-square odd" id="a-7"><div class="opp-chess-piece knight" id="opponent-knight-2"></div></div>
+            <div class="chess-square even" id="a-8"><div class="opp-chess-piece rook" id="opponent-rook-2"></div></div>
+            <div class="chess-square even" id="b-1"><div class="opp-chess-piece pawn" id="opponent-pawn-1"></div></div>
+            <div class="chess-square odd" id="b-2"><div class="opp-chess-piece pawn" id="opponent-pawn-2"></div></div>
+            <div class="chess-square even" id="b-3"><div class="opp-chess-piece pawn" id="opponent-pawn-3"></div></div>
+            <div class="chess-square odd" id="b-4"><div class="opp-chess-piece pawn" id="opponent-pawn-4"></div></div>
+            <div class="chess-square even" id="b-5"><div class="opp-chess-piece pawn" id="opponent-pawn-5"></div></div>
+            <div class="chess-square odd" id="b-6"><div class="opp-chess-piece pawn" id="opponent-pawn-6"></div></div>
+            <div class="chess-square even" id="b-7"><div class="opp-chess-piece pawn" id="opponent-pawn-7"></div></div>
+            <div class="chess-square odd" id="b-8"><div class="opp-chess-piece pawn" id="opponent-pawn-8"></div></div>
+            <div class="chess-square odd" id="c-1"></div>
+            <div class="chess-square even" id="c-2"></div>
+            <div class="chess-square odd" id="c-3"></div>
+            <div class="chess-square even" id="c-4"></div>
+            <div class="chess-square odd" id="c-5"></div>
+            <div class="chess-square even" id="c-6"></div>
+            <div class="chess-square odd" id="c-7"></div>
+            <div class="chess-square even" id="c-8"></div>
+            <div class="chess-square even" id="d-1"></div>
+            <div class="chess-square odd" id="d-2"></div>
+            <div class="chess-square even" id="d-3"></div>
+            <div class="chess-square odd" id="d-4"></div>
+            <div class="chess-square even" id="d-5"></div>
+            <div class="chess-square odd" id="d-6"></div>
+            <div class="chess-square even" id="d-7"></div>
+            <div class="chess-square odd" id="d-8"></div>
+            <div class="chess-square odd" id="e-1"></div>
+            <div class="chess-square even" id="e-2"></div>
+            <div class="chess-square odd" id="e-3"></div>
+            <div class="chess-square even" id="e-4"></div>
+            <div class="chess-square odd" id="e-5"></div>
+            <div class="chess-square even" id="e-6"></div>
+            <div class="chess-square odd" id="e-7"></div>
+            <div class="chess-square even" id="e-8"></div>
+            <div class="chess-square even" id="f-1"></div>
+            <div class="chess-square odd" id="f-2"></div>
+            <div class="chess-square even" id="f-3"></div>
+            <div class="chess-square odd" id="f-4"></div>
+            <div class="chess-square even" id="f-5"></div>
+            <div class="chess-square odd" id="f-6"></div>
+            <div class="chess-square even" id="f-7"></div>
+            <div class="chess-square odd" id="f-8"></div>
+            <div class="chess-square odd" id="g-1"><div class="player-chess-piece pawn" id="player-pawn-1"></div></div>
+            <div class="chess-square even" id="g-2"><div class="player-chess-piece pawn" id="player-pawn-2"></div></div>
+            <div class="chess-square odd" id="g-3"><div class="player-chess-piece pawn" id="player-pawn-3"></div></div>
+            <div class="chess-square even" id="g-4"><div class="player-chess-piece pawn" id="player-pawn-4"></div></div>
+            <div class="chess-square odd" id="g-5"><div class="player-chess-piece pawn" id="player-pawn-5"></div></div>
+            <div class="chess-square even" id="g-6"><div class="player-chess-piece pawn" id="player-pawn-6"></div></div>
+            <div class="chess-square odd" id="g-7"><div class="player-chess-piece pawn" id="player-pawn-7"></div></div>
+            <div class="chess-square even" id="g-8"><div class="player-chess-piece pawn" id="player-pawn-8"></div></div>
+            <div class="chess-square even" id="h-1"><div class="player-chess-piece rook" id="player-rook-1"></div></div>
+            <div class="chess-square odd" id="h-2"><div class="player-chess-piece knight" id="player-knight-1"></div></div>
+            <div class="chess-square even" id="h-3"><div class="player-chess-piece bishop" id="player-bishop-1"></div></div>
+            <div class="chess-square odd" id="h-4"><div class="player-chess-piece queen" id="player-queen-1"></div></div>
+            <div class="chess-square even" id="h-5"><div class="player-chess-piece king" id="player-king-1"></div></div>
+            <div class="chess-square odd" id="h-6"><div class="player-chess-piece bishop" id="player-bishop-2"></div></div>
+            <div class="chess-square even" id="h-7"><div class="player-chess-piece knight" id="player-knight-2"></div></div>
+            <div class="chess-square odd" id="h-8"><div class="player-chess-piece rook" id="player-rook-2"></div></div>
+        </div>
+        <div id="options-menu">
+            <div class="options-header">
+                <div class="exit-button"></div>
+            </div>
+            <p class="option-text" style="top: 12%">Board Style</p>
+            <select class="option-selector" id="board-styles" style="top: 12%">
+                <option>Traditional</option>
+                <option>Deep Ocean</option>
+                <option>Warm Wood</option>
+                <option>Queens Palace</option>
+                <option>Campfire</option>
+                <option>Jungle</option>
+                <option>Murky Night</option>
+                <option>Rustic</option>
+                <option>Valentines</option>
+                <option>Clean Oak</option>
+            </select>
+            <p class="option-text" style="top: 24%">Piece Style</p>
+            <select class="option-selector" id="piece-styles" style="top: 24%">
+                <option>Traditional</option>
+                <option>Oceanic</option>
+                <option>Amazon</option>
+                <option>Royalty</option>
+                <option>Midnight</option>
+                <option>Tundra</option>
+                <option>Sahara</option>
+                <option>Deep Space</option>
+                <option>Hearts</option>
+                <option>Spruce</option>
+            </select>
+            <button id="confirm-options-button">Confirm</button>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+
+        $(window).on("load", function (e) { 
+            var $ = window.jQuery;
+            $('#body-div').data('old-state', $('#body-div').html());
+        });
+
+        $(document).ready(function () {
+
+            function getAllSquares() {
+                var totalPositionList = [];
+                $('.chess-square').each(function () {
+                    totalPositionList.push($(this).attr('id'));
+                });
+                return totalPositionList;
+            }
+
+            function getOpponentSquares() {
+                var allOpponentList = [];
+                $('.chess-square').find('.opp-chess-piece').each(function () {
+                    allOpponentList.push($(this).parent().attr('id'));
+                });
+                allOpponentList.reverse;
+                return allOpponentList;
+            }
+
+            function getPlayerSquares() {
+                var allPlayerList = [];
+                $('.chess-square').find('.player-chess-piece').each(function () {
+                    allPlayerList.push($(this).parent().attr('id'));
+                });
+                return allPlayerList;
+            }
+
+            function getOpponentPieces() {
+                var allOpponentList = [];
+                $('.chess-square').find('.opp-chess-piece').each(function () {
+                    allOpponentList.push($(this).attr('id'));
+                });
+                allOpponentList.reverse;
+                return allOpponentList;
+            }
+
+            function getPlayerPieces() {
+                var allPlayerList = [];
+                $('.chess-square').find('.player-chess-piece').each(function () {
+                    allPlayerList.push($(this).attr('id'));
+                });
+                return allPlayerList;
+            }
+
+            function addMoveData(pieceId, positionId, pClass) {
+                var moveData = {};
+                moveData.piece = pieceId;
+                moveData.position = positionId;
+                $.post("@Url.Action("ShortenMove", "Home")", { model: moveData }, function (data) {
+                    var lastLog = $('#position-log').children().last();
+                    $('<p class = ' + pClass + '>' + data.shortPiece + data.shortPosition + '</p>').appendTo($(lastLog));
+                });
+            }
+
+            $('#turn-display').on("move-opponent", function () {
+                var dataToPost = {};
+                dataToPost.totalSquareList = getAllSquares();
+                dataToPost.opponentSquareList = getOpponentSquares();
+                dataToPost.playerSquareList = getPlayerSquares();
+                dataToPost.opponentPieceList = getOpponentPieces();
+                dataToPost.playerPieceList = getPlayerPieces();
+                $.post("@Url.Action("MoveOpponentPiece", "Home")", { model: dataToPost }, function (data) {
+                    var piece = '#' + data.opponentPiece;
+                    var pieceClass = $(piece).attr('class').split(' ')[1];
+                    var startPos = $(piece).parent().attr('id');
+                    var startPosition = $('#' + startPos).position();
+                    var squarePosition = $('#' + data.finalPosition).position();
+                    var topDiff = ((squarePosition.top - startPosition.top) + 35).toString() + 'px';
+                    var leftDiff = ((squarePosition.left - startPosition.left) + 35).toString() + 'px';
+
+                    addMoveData(piece, data.finalPosition, 'opp-move');
+
+                    $($(piece)).animate({ top: topDiff, left: leftDiff }, 400, function () {
+                        $($(piece)).detach().appendTo($('#' + data.finalPosition));
+                        $(piece).css('top', '35px');
+                        $(piece).css('left', '35px');
+                        if (data.removePlayerPiece.length > 0) {
+                            var playerClass = $('#' + data.removePlayerPiece).attr('class').split(" ")[1];
+                            var playerColor = $('.player-chess-piece').css('color');
+                            createPieceIcon(playerClass, playerColor, '#opp-piece-container');
+                            $($('#' + data.removePlayerPiece)).detach();
+                        };
+                        $('#ai-text-bubble').text('');
+                        if (data.check) {
+                            $('#ai-text-bubble').text('I got you in check!');
+                        }
+                        if (data.checkmate) {
+
+                        } else if (data.stalemate) {
+
+                        } else {
+                            if (data.newPawn != "pawn") {
+                                $(piece).removeClass("pawn");
+                                var num = $(".opp-chess-piece pawn").length;
+                                switch (data.newPawn) {
+                                    case 'queen':
+                                        $(piece).addClass("queen");
+                                        $(piece).attr('id', 'opp-special-queen-' + num);
+                                        break;
+                                    case 'rook':
+                                        $(piece).addClass("rook");
+                                        $(piece).attr('id', 'opp-special-rook-' + num);
+                                        break;
+                                    case 'bishop':
+                                        $(piece).addClass("bishop");
+                                        $(piece).attr('id', 'opp-special-bishop-' + num);
+                                        break;
+                                    case 'knight':
+                                        $(piece).addClass("knight");
+                                        $(piece).attr('id', 'opp-special-knight-' + num);
+                                        break;
+                                }
+                            }
+
+                            $('#turn-display').css("background-color", "forestgreen");
+                        }
+
+
+                    });
+                });
+            });
+
+            function displayPlayerOptions(pieceClass, startPos) {
+                var dataToPost = {};
+                dataToPost.pieceClass = pieceClass;
+                dataToPost.startPosition = startPos;
+                dataToPost.opponentSquareList = getOpponentSquares();
+                dataToPost.playerSquareList = getPlayerSquares();
+                $.post("@Url.Action("GetPlayerOptions", "Home")", { model: dataToPost }, function (data) {
+                    $.each(data.options, function (index, value) {
+                        jQuery('<div/>', {
+                            class: 'position-indicator',
+                        }).appendTo('#' + value);
+                    });
+                    $.each(data.hostileOptions, function (index, value) {
+                        jQuery('<div/>', {
+                            class: 'hostile-position-indicator',
+                        }).appendTo('#' + value);
+                    });
+                });
+            }
+            function createNewLog() {
+                var slotNumber = $('#position-log').children().length + 1;
+                var slotClass;
+                if (slotNumber % 2 == 0) {
+                    slotClass = "move-slot-even"
+                } else {
+                    slotClass = "move-slot-odd"
+                }
+                $('<div class = ' + slotClass + '><p class = slot-index>' + slotNumber + '.</p></div>').appendTo($('#position-log'));
+            }
+
+            function createPieceIcon(pieceClass, pieceColor, containerId) {
+                $.post("@Url.Action("GetIconClass", "Home")", { startClass: pieceClass }, function (data) {
+                    var smallClass = data.smallClass;
+                    var newSmallPiece = $('<div class = container-piece-icon></div>');
+                    $(newSmallPiece).addClass(smallClass);
+                    $(newSmallPiece).css('color', pieceColor);
+                    var idNumber = $(containerId + '> .' + smallClass).length + 1;
+                    var idHeader;
+                    if (containerId == '#opp-piece-container') idHeader = 'opp-';
+                    else idHeader = 'player-';
+                    $(newSmallPiece).attr('id', idHeader + smallClass + '-' + idNumber);
+
+                    if ($(containerId).last().find('.' + smallClass).length) {
+                        $(newSmallPiece).css('margin-left', '-24px');
+                        var lastPieceOfClass = $(containerId + '> .' + smallClass).last().attr('id');
+                        $(newSmallPiece).insertAfter('#' + lastPieceOfClass);
+                    } else {
+                        $(newSmallPiece).appendTo($(containerId));
+                    }
+
+
+                });
+            }
+
+            //Player Movement
+            $(".chess-square").click(function () {
+                if ($('#turn-display').css('background-color') == 'rgb(139, 0, 0)') {
+                    return false;
+                }
+                var playerColor1 = $('#player-color-marker').css('color');
+                var playerColor2 = $('#player-secondary-marker').css('color');
+                var oppColor = $('#opp-color-marker').css('color');
+                if (($(this).is(':empty')) || ($(this.lastChild).css('background-color') == 'rgb(150, 150, 150)')) {
+                    var square = this;
+                    $(".position-indicator").remove();
+                    $(".hostile-position-indicator").remove();
+                    $('.player-chess-piece').filter(function () {
+                        return $(this).css('color') == playerColor2;
+                    }).each(function () {
+                        var piece = this;
+                        var pieceClass = $(piece).attr('class').split(' ')[1];
+                        var startPos = $(piece).parent().attr('id');
+                        var dataToPost = {};
+                        dataToPost.pieceClass = pieceClass;
+                        dataToPost.startPosition = startPos;
+                        dataToPost.endPosition = $(square).attr('id');
+                        dataToPost.opponentSquareList = getOpponentSquares();
+                        dataToPost.playerSquareList = getPlayerSquares();
+                        dataToPost.playerPieceList = getPlayerPieces();
+                        dataToPost.opponentPieceList = getOpponentPieces();
+
+                        $.post("@Url.Action("MovePlayerPiece", "Home")", { model: dataToPost }, function (data) {
+                            if (data.canMove) {
+                                $($(piece)).css("color", playerColor1);
+                                var startPos = $(piece).parent().attr('id');
+                                var startPosition = $('#' + startPos).position();
+                                var squarePosition = $(square).position();
+                                var topDiff = ((squarePosition.top - startPosition.top) + 35).toString() + 'px';
+                                var leftDiff = ((squarePosition.left - startPosition.left) + 35).toString() + 'px';
+                                createNewLog();
+                                addMoveData($(piece).attr('id'), $(square).attr('id'), 'player-move');
+                                console.log("Pawn: " + data.pawnChange);
+
+                                $('#turn-display').css("background-color", "darkred");
+
+                                $($(piece)).animate({ top: topDiff, left: leftDiff }, 400, function () {
+                                    $($(piece)).detach().appendTo($(square));
+                                    $(piece).css('top', '35px');
+                                    $(piece).css('left', '35px');
+                                    console.log("stalemate: " + data.stalemate);
+                                    if (data.pawnChange) {
+                                        $('.pawn-changer-container').css('visibility', 'visible');
+                                    } else if (data.checkmate) {
+                                        $('.game-over-screen').css('visibility', 'visible');
+                                        $('.game-over-title').text('Checkmate! You win!');
+                                    } else if (data.stalemate) {
+                                        $('.game-over-screen').css('visibility', 'visible');
+                                        $('.game-over-title').text("Stalemate! It's a tie!");
+                                    } else {
+                                        setTimeout(function () {
+                                            var quoteDataInput = {};
+                                            quoteDataInput.uselessString = "What's up?";
+                                            $.post("@Url.Action("GetQuote", "Home")", { model: quoteDataInput }, function (data) {
+                                                $('#ai-text-bubble').text(data.quote);
+                                            });
+                                        }, 50);
+                                        setTimeout(function () {
+                                            $('#turn-display').trigger("move-opponent");
+                                        }, 100);
+                                    }
+                                });
+                            }
+                        });
+
+                    });
+                } else {
+                    if ($(this.firstChild).css('color') == playerColor1) {
+                        $(".position-indicator").remove();
+                        $(".hostile-position-indicator").remove();
+                        $(".player-chess-piece").each(function (index, value) {
+                            $(value).css('color', playerColor1);
+                        });
+                        $(this.firstChild).css("color", playerColor2);
+                        console.log("what" + playerColor2);
+                        console.log("new color" + $(this.firstChild).css('color'));
+                        var piece = $(this.firstChild);
+                        var pieceClass = $(piece).attr('class').split(' ')[1];
+                        var startPos = $(piece).parent().attr('id');
+                        displayPlayerOptions(pieceClass, startPos);
+                    } else if ($(this.firstChild).css('color') == playerColor2) {
+                        $(this.firstChild).css("color", playerColor1);
+                        $(".position-indicator").remove();
+                        $(".hostile-position-indicator").remove();
+                    } else if ($(this.firstChild).css('color') == oppColor) {
+                        var square = this;
+                        var oppPiece = $(this.firstChild).attr('id');
+                        $('.player-chess-piece').filter(function () {
+                            return $(this).css('color') == playerColor2;
+                        }).each(function () {
+                            var piece = this;
+                            var pieceClass = $(piece).attr('class').split(' ')[1];
+                            var startPos = $(piece).parent().attr('id');
+                            var dataToPost = {};
+                            dataToPost.pieceClass = pieceClass;
+                            dataToPost.startPosition = startPos;
+                            dataToPost.endPosition = $(square).attr('id');
+                            dataToPost.opponentSquareList = getOpponentSquares();
+                            dataToPost.playerSquareList = getPlayerSquares();
+                            dataToPost.playerPieceList = getPlayerPieces();
+                            dataToPost.opponentPieceList = getOpponentPieces();
+
+                            $.post("@Url.Action("MovePlayerPiece", "Home")", { model: dataToPost }, function (data) {
+                                console.log("can move: " + data.canMove);
+                                if (data.canMove) {
+                                    $(".position-indicator").remove();
+                                    $(".hostile-position-indicator").remove();
+                                    $($(piece)).css("color", playerColor1);
+                                    var startPos = $(piece).parent().attr('id');
+                                    var startPosition = $('#' + startPos).position();
+                                    var squareId = $(square).attr('id');
+                                    var squarePosition = $('#' + squareId).position();
+                                    var topDiff = ((squarePosition.top - startPosition.top) + 30).toString() + 'px';
+                                    var leftDiff = ((squarePosition.left - startPosition.left) + 30).toString() + 'px';
+                                    createNewLog();
+                                    addMoveData($(piece).attr('id'), $(square).attr('id'), 'player-move');
+                                    $($(piece)).animate({ top: topDiff, left: leftDiff }, 400, function () {
+                                        $($(piece)).detach().appendTo($(square));
+                                        $(piece).css('top', '30px');
+                                        $(piece).css('left', '30px');
+                                        var oppClass = $('#' + oppPiece).attr('class').split(' ')[1];
+                                        var oppColor = $('.opp-chess-piece').css('color');
+                                        createPieceIcon(oppClass, oppColor, '#player-piece-container');
+                                        $('#' + oppPiece).detach();
+                                        $('#turn-display').css("background-color", "darkred");
+                                        if (data.pawnChange) {
+                                            $('.pawn-changer-container').css('visibility', 'visible');
+                                        } else {
+                                            setTimeout(function () {
+                                                $('#turn-display').trigger("move-opponent");
+                                            }, 50);
+                                        }
+                                    });
+
+                                }
+                            });
+
+                        });
+                    }
+                }
+            });
+
+            //Option Menu
+            $('#options-button').click(function () {
+                $('#options-menu').css('visibility', 'visible');
+            });
+
+            $('.exit-button').click(function () {
+                $('#options-menu').css('visibility', 'hidden');
+            });
+
+            function changeOddColor(newColor) {
+                $(".odd").each(function (index) {
+                    $(this).css('background-color', newColor);
+                });
+            }
+
+            function changeEvenColor(newColor) {
+                $(".even").each(function (index) {
+                    $(this).css('background-color', newColor);
+                });
+            }
+
+            function changePlayerColor(newColor) {
+                $(".player-chess-piece").each(function (index) {
+                    $(this).css('color', newColor);
+                });
+                $('#player-color-marker').css('color', newColor);
+            }
+
+            function changePlayerSecondary(newColor) {
+                $('#player-secondary-marker').css('color', newColor);
+            }
+
+            function changeOpponentColor(newColor) {
+                $(".opp-chess-piece").each(function (index) {
+                    $(this).css('color', newColor);
+                });
+                $('#opp-color-marker').css('color', newColor);
+            }
+
+            $('.pawn-changer-button').click(function () {
+                var button = $(this).attr('id');
+                $(".player-chess-piece").each(function (index) {
+                    if ($(this).hasClass("pawn")) {
+                        if ($(this).parent().attr('id').indexOf("a") >= 0) {
+                            $(this).removeClass("pawn");
+                            var num = $(".player-chess-piece pawn").length;
+                            switch (button) {
+                                case 'queen-button':
+                                    $(this).addClass("queen");
+                                    $(this).attr('id', 'special-queen-' + num);
+                                    break;
+                                case 'rook-button':
+                                    $(this).addClass("rook");
+                                    $(this).attr('id', 'special-rook-' + num);
+                                    break;
+                                case 'bishop-button':
+                                    $(this).addClass("bishop");
+                                    $(this).attr('id', 'special-bishop-' + num);
+                                    break;
+                                case 'knight-button':
+                                    $(this).addClass("knight");
+                                    $(this).attr('id', 'special-knight-' + num);
+                                    break;
+                            }
+                            $('.pawn-changer-container').css('visibility', 'hidden');
+                            setTimeout(function () {
+                                var quoteDataInput = {};
+                                quoteDataInput.uselessString = "What's up?";
+                                $.post("@Url.Action("GetQuote", "Home")", { model: quoteDataInput }, function (data) {
+                                    $('#ai-text-bubble').text(data.quote);
+                                });
+                            }, 50);
+                            setTimeout(function () {
+                                $('#turn-display').trigger("move-opponent");
+                            }, 100);
+                        }
+                    }
+                });
+            });
+
+            function resetBoard() {
+                location.reload();
+               
+            }
+
+            $('.new-game-button').click(function () {
+                resetBoard();
+                $('.game-over-screen').css('visibility', 'hidden');
+            });
+
+            $('#confirm-options-button').click(function () {
+                switch ($('#board-styles').find(":selected").text()) {
+                    case "Deep Ocean":
+                        changeOddColor('#444c51');
+                        changeEvenColor('#c7d4bf');
+                        break;
+                    case "Traditional":
+                        changeOddColor('saddlebrown');
+                        changeEvenColor('sandybrown');
+                        break;
+                    case "Warm Wood":
+                        changeOddColor('#743d13');
+                        changeEvenColor('#b3801a');
+                        break;
+                    case "Queens Palace":
+                        changeOddColor('#801e19');
+                        changeEvenColor('#9c9785');
+                        break;
+                    case "Campfire":
+                        changeOddColor('#9f0e04');
+                        changeEvenColor('#fccd70');
+                        break;
+                    case "Jungle":
+                        changeOddColor('#7c8444');
+                        changeEvenColor('#cabc8c');
+                        break;
+                    case "Murky Night":
+                        changeOddColor('#422a2f');
+                        changeEvenColor('#d2dcd5');
+                        break;
+                    case "Rustic":
+                        changeOddColor('#844c34');
+                        changeEvenColor('#f4d2a9');
+                        break;
+                    case "Valentines":
+                        changeOddColor('#5b0408');
+                        changeEvenColor('#e49c74');
+                        break;
+                    case "Clean Oak":
+                        changeOddColor('#743d13');
+                        changeEvenColor('#edb34a');
+                        break;
+                }
+                switch ($('#piece-styles').find(":selected").text()) {
+                    case "Traditional":
+                        changePlayerColor('white');
+                        changePlayerSecondary('rgb(225, 225, 225)');
+                        changeOpponentColor('black');
+                        break;
+                    case "Oceanic":
+                        changePlayerColor('#6666ff');
+                        changePlayerSecondary('#8888ff');
+                        changeOpponentColor('#000066'); 
+                        break;
+                    case "Amazon":
+                        changePlayerColor('#37D06A');
+                        changePlayerSecondary('#6FD591');
+                        changeOpponentColor('#006E25');
+                        break;
+                    case "Royalty":
+                        changePlayerColor('#B266FF');
+                        changePlayerSecondary('#CC99FF');
+                        changeOpponentColor('#190033');
+                        break;
+                    case "Midnight":
+                        changePlayerColor('#CC99FF');
+                        changePlayerSecondary('#E5CCFF');
+                        changeOpponentColor('000033');
+                        break;
+                    case "Tundra":
+                        changePlayerColor('#E0E0E0');
+                        changePlayerSecondary('#FFFFFF');
+                        changeOpponentColor('#006633');
+                        break;
+                    case "Sahara":
+                        changePlayerColor('#FFFF66');
+                        changePlayerSecondary('#FFFF99');
+                        changeOpponentColor('#663300');
+                        break;
+                    case "Deep Space":
+                        changePlayerColor('#9999FF');
+                        changePlayerSecondary('#CCCCFF');
+                        changeOpponentColor('#202020');
+                        break;
+                    case "Hearts":
+                        changePlayerColor('#FF9999');
+                        changePlayerSecondary('#FFCCCC');
+                        changeOpponentColor('#660033');
+                        break;
+                    case "Spruce":
+                        changePlayerColor('#D0AA78');
+                        changePlayerSecondary('#DCC19E');
+                        changeOpponentColor('#331900');
+                        break;
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
